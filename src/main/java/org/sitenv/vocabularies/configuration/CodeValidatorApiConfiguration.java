@@ -52,11 +52,11 @@ import org.springframework.transaction.PlatformTransactionManager;
 @EnableAsync
 @ComponentScan("org.sitenv.vocabularies")
 @EnableJpaRepositories("org.sitenv.vocabularies.validation.repositories")
-@PropertySource("classpath:ais.properties")
+@PropertySource("classpath:CodeValidator.properties")
 public class CodeValidatorApiConfiguration implements AsyncConfigurer {
 	private static final Logger logger = Logger.getLogger(CodeValidatorApiConfiguration.class);
 	private static final String HSQL_JDBC_URL_TEMPLATE = "jdbc:h2:mem:inmemdb;DB_CLOSE_DELAY=-1;MULTI_THREADED=1;CACHE_SIZE=1048576";
-		
+
 
 	@Value("classpath:schema.sql")
 	private Resource HSQL_SCHEMA_SCRIPT;
@@ -116,7 +116,7 @@ public class CodeValidatorApiConfiguration implements AsyncConfigurer {
 		// jpaProperties.put("hibernate.dialect",
 		// "org.hibernate.dialect.HSQLDialect");
 		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
-//		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2008Dialect");		
+//		jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2008Dialect");
 		jpaProperties.put("hibernate.format_sql", "true");
 		jpaProperties.put("hibernate.show_sql", "false");
 		jpaProperties.put("hibernate.connection.pool_size", "80");
@@ -170,9 +170,7 @@ public class CodeValidatorApiConfiguration implements AsyncConfigurer {
 		ds.setPassword("");
 		ds.setInitialSize(initialSize);
 		ds.setMinIdle(minIdle);
-// 		https://commons.apache.org/proper/commons-dbcp/ 1.x to 2.x setMaxActive to setMaxTotal
-//		ds.setMaxActive(maxActive);
-		ds.setMaxTotal(maxActive);
+		ds.setMaxTotal(maxActive); // DBCP2 maxTotal: The maximum number of active connections that can be allocated from this pool at the same time, or negative for no limit.
 		// ds.setDriverClassName("org.hsqldb.jdbcDriver");
 		ds.setDriverClassName("org.h2.Driver");
 		//ds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -215,8 +213,8 @@ public class CodeValidatorApiConfiguration implements AsyncConfigurer {
 	@Autowired
 	@Bean
 	VocabularyLoadRunner vocabularyLoadRunner(final Environment environment,
-			final VocabularyLoaderFactory vocabularyLoaderFactory, final DataSourceInitializer dataSourceInitializer,
-			final DataSource dataSource) {
+											  final VocabularyLoaderFactory vocabularyLoaderFactory, final DataSourceInitializer dataSourceInitializer,
+											  final DataSource dataSource) {
 		// VocabularyLoadRunner vocabularyLoadRunner(final Environment
 		// environment, final VocabularyLoaderFactory vocabularyLoaderFactory,
 		// final DataSourceInitializer dataSourceInitializer, final DataSource
