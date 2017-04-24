@@ -44,4 +44,6 @@ public abstract class IcdLoader extends BaseVocabularyLoader {
 		return builder.build();
 
 	}
+	
+//	 protected abstract void setOID(String oid);
 }
