@@ -9,7 +9,7 @@ import java.sql.SQLException;
  */
 public abstract class BaseVocabularyLoader {
 
-    public final String codeTableInsertSQLPrefix = "insert into CODES (ID, CODE, DISPLAYNAME, CODESYSTEM, CODESYSTEMOID) values ";
+    public final String codeTableInsertSQLPrefix = "insert into CODES (CODE, DISPLAYNAME, CODESYSTEM, CODESYSTEMOID) values (?,?,?,?)";
 
     public boolean doInsert(String sql, Connection connection) throws SQLException {
         PreparedStatement preparedStatement = null;
@@ -17,7 +17,6 @@ public abstract class BaseVocabularyLoader {
         try{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.execute();
-            connection.commit();
         }finally {
             if(preparedStatement != null){
                 preparedStatement.close();
