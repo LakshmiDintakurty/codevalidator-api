@@ -3,7 +3,7 @@
 
 	<groupId>org.sitenv.vocabulary</groupId>
 	<artifactId>codevalidator-api</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.6-SNAPSHOT</version>
 	<name>Code Validator API</name>
 	<url>http://www.sitenv.org</url>
 
@@ -136,7 +136,7 @@
 
 	<build>
     	
-		<finalName>codevalidator-${version}</finalName>
+		<finalName>cerner-codevalidator-${version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
