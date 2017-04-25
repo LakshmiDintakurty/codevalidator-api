@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.sitenv.vocabulary</groupId>
-	<artifactId>codevalidator-api</artifactId>
+	<artifactId>cerner-codevalidator-api</artifactId>
 	<version>1.0.6-SNAPSHOT</version>
 	<name>Code Validator API</name>
 	<url>http://www.sitenv.org</url>
