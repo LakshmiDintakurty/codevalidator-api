@@ -148,8 +148,8 @@
 	</dependencies>
 
 	<build>
-
-		<finalName>codevalidator-${version}</finalName>
+    	
+		<finalName>cerner-codevalidator-${version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
