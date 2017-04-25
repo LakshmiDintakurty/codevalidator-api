@@ -148,7 +148,8 @@
 	</dependencies>
 
 	<build>
-		<finalName>codevalidator</finalName>
+
+		<finalName>codevalidator-${version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
