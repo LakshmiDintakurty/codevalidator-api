@@ -9,5 +9,5 @@ import org.springframework.stereotype.Component;
 public class Icd10PcsLoader extends Icd10BaseLoader {
     public Icd10PcsLoader() {
         this.oid = CodeSystemOIDs.ICD10PCS.codesystemOID();
-    }
+	}
 }
