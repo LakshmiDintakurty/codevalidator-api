@@ -3,11 +3,9 @@
 
 	<groupId>org.sitenv.vocabulary</groupId>
 	<artifactId>codevalidator-api</artifactId>
-<<<<<<< HEAD
+
 	<version>1.0.10</version>
-=======
-	<version>0.0.1</version>
->>>>>>> Added version number to target jar file name codevalidator-${version}.jar.  Starting with version number 0.0.1.
+
 	<name>Code Validator API</name>
 	<url>http://www.sitenv.org</url>
 
@@ -152,7 +150,7 @@
 
 	<build>
     	
-		<finalName>codevalidator-${version}</finalName>
+		<finalName>cerner-codevalidator-${version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
