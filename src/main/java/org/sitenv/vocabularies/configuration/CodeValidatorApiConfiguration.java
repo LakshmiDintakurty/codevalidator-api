@@ -138,7 +138,7 @@ public class CodeValidatorApiConfiguration implements AsyncConfigurer {
 		return new HibernateExceptionTranslator();
 	}
 
-    @Autowired
+	@Autowired
 	@Bean
 	public DataSourceInitializer dataSourceInitializer(final DataSource dataSource) {
 		final DataSourceInitializer initializer = new DataSourceInitializer();
@@ -170,9 +170,7 @@ public class CodeValidatorApiConfiguration implements AsyncConfigurer {
 		ds.setPassword("");
 		ds.setInitialSize(initialSize);
 		ds.setMinIdle(minIdle);
-		ds.setMaxTotal(maxActive);  // DBCP2 maxTotal: The maximum number of active connections that can be allocated from this pool at the same time, or negative for no limit. 
-									// Old version with DBCP uses setMaxActive 
-
+		ds.setMaxTotal(maxActive); // DBCP2 maxTotal: The maximum number of active connections that can be allocated from this pool at the same time, or negative for no limit.
 		// ds.setDriverClassName("org.hsqldb.jdbcDriver");
 		ds.setDriverClassName("org.h2.Driver");
 		//ds.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
