@@ -3,4 +3,8 @@
 /.settings
 /.classpath
 /.project
+<<<<<<< HEAD
 /target/
+=======
+/target
+>>>>>>> Cerner initial commit to reflect major performance enhancements done based on 1/30/2017 ETT Code Validator Release 1.0.5 (pom.xml has <version>1.0.6-SNAPSHOT</version>)

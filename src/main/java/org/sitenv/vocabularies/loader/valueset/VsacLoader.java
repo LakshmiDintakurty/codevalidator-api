@@ -129,8 +129,10 @@ public class VsacLoader extends BaseCodeLoader implements VocabularyLoader {
                             if(!headerRowFound){
                                 if(hasValueInCell(row, 0) && row.getCell(0).getStringCellValue().toUpperCase().trim().equals(HEADER_ROW_FINDER_KEY)){
                                     headerRowFound = true;
-                                }
-                            }
+                        }
+//                        preparedStatement.executeBatch();
+//                        connection.commit();
+                    }
                         }
 //                        preparedStatement.executeBatch();
 //                        connection.commit();

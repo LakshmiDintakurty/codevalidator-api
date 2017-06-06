@@ -68,8 +68,8 @@ public class RxNormLoader extends BaseCodeLoader implements VocabularyLoader {
 //                            pendingCount = 0;
 //                        }
                     }
+                    }
                 }
-            }
 //            if (pendingCount > 0) {
 //                doInsert(insertQueryBuilder.toString(), connection);
 //            }
