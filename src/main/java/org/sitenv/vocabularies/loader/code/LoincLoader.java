@@ -69,10 +69,27 @@ public class LoincLoader extends BaseCodeLoader implements VocabularyLoader {
                             String componentName = StringUtils.strip(line[1], "\"");
                             String shortName = StringUtils.strip(line[23], "\"");
                             n++;
+                            
+                            buildCodeInsertQueryString(insertQueryBuilder, code, longCommonName.toUpperCase(), codeSystem, oid);
+                            t.update(insertQueryBuilder.toString());
+                            insertQueryBuilder.clear();
+                            insertQueryBuilder.append(codeTableInsertSQLPrefix);
+                            
+                            buildCodeInsertQueryString(insertQueryBuilder, code, componentName.toUpperCase(), codeSystem, oid);
+                            t.update(insertQueryBuilder.toString());
+                            insertQueryBuilder.clear();
+                            insertQueryBuilder.append(codeTableInsertSQLPrefix);
 
-                            t.update(codeTableInsertSQLPrefix,code.toUpperCase(),longCommonName.toUpperCase(),codeSystem,oid);
-                            t.update(codeTableInsertSQLPrefix,code.toUpperCase(),componentName.toUpperCase(),codeSystem,oid);
-                            t.update(codeTableInsertSQLPrefix,code.toUpperCase(),shortName.toUpperCase(),codeSystem,oid);
+                            
+                            buildCodeInsertQueryString(insertQueryBuilder, code, shortName.toUpperCase(), codeSystem, oid);
+                            t.update(insertQueryBuilder.toString());
+                            insertQueryBuilder.clear();
+                            insertQueryBuilder.append(codeTableInsertSQLPrefix);
+                            
+                            
+//                            t.update(codeTableInsertSQLPrefix,code.toUpperCase(),longCommonName.toUpperCase(),codeSystem,oid);
+//                            t.update(codeTableInsertSQLPrefix,code.toUpperCase(),componentName.toUpperCase(),codeSystem,oid);
+//                            t.update(codeTableInsertSQLPrefix,code.toUpperCase(),shortName.toUpperCase(),codeSystem,oid);
 
 //                            t.update(insertQueryPrefix,StringUtils.strip(line[0], "\"").toUpperCase(),StringUtils.strip(line[29], "\"").toUpperCase(),file.getParentFile().getName(),CodeSystemOIDs.LOINC.codesystemOID());
 

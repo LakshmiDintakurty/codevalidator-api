@@ -59,7 +59,12 @@ public class RxNormLoader extends BaseCodeLoader implements VocabularyLoader {
 //                        insertQueryBuilder.append("')");
 
                         n++;
-                        t.update(codeTableInsertSQLPrefix,code,displayName.toUpperCase(),codeSystem,CodeSystemOIDs.RXNORM.codesystemOID());
+                        buildCodeInsertQueryString(insertQueryBuilder, code, displayName.toUpperCase(), codeSystem, CodeSystemOIDs.RXNORM.codesystemOID());
+                        t.update(insertQueryBuilder.toString());
+                        insertQueryBuilder.clear();
+                        insertQueryBuilder.append(codeTableInsertSQLPrefix);
+                        
+//                        t.update(codeTableInsertSQLPrefix,code,displayName.toUpperCase(),codeSystem,CodeSystemOIDs.RXNORM.codesystemOID());
 
 //                        if ((++totalCount % 5000) == 0) {
 //                            doInsert(insertQueryBuilder.toString(), connection);

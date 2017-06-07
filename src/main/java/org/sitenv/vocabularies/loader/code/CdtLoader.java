@@ -72,7 +72,12 @@ public class CdtLoader extends BaseCodeLoader {
 //                                insertQueryBuilder.append("')");
 
                                 n++;
-                                t.update(insertQueryPrefix,code.toUpperCase().trim(),displayName.toUpperCase().trim(),file.getParentFile().getName(),CodeSystemOIDs.CDT.codesystemOID());
+                                buildCodeInsertQueryString(insertQueryBuilder, code.toUpperCase(), displayName.toUpperCase(), codeSystem, CodeSystemOIDs.CDT.codesystemOID());
+                                t.update(insertQueryPrefix.toString());
+                                insertQueryBuilder.clear();
+                                insertQueryBuilder.append(codeTableInsertSQLPrefix);
+                                
+//                                t.update(insertQueryPrefix,code.toUpperCase().trim(),displayName.toUpperCase().trim(),file.getParentFile().getName(),CodeSystemOIDs.CDT.codesystemOID());
 
                             }
                         }
