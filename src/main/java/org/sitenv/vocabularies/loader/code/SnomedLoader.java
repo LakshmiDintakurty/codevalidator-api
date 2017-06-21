@@ -63,6 +63,8 @@ public class SnomedLoader extends BaseCodeLoader implements VocabularyLoader {
 //                            insertQueryBuilder.append("')");
 
                             n++;
+
+                            
                             buildCodeInsertQueryString(insertQueryBuilder, code.toUpperCase(), displayName.toUpperCase(), codeSystem, CodeSystemOIDs.SNOMEDCT.codesystemOID());
                             t.update(insertQueryBuilder.toString());
                             insertQueryBuilder.clear();
