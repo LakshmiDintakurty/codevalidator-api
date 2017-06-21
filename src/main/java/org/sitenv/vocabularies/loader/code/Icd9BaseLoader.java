@@ -46,7 +46,7 @@ public abstract class Icd9BaseLoader extends BaseCodeLoader {
                         if (!line.isEmpty()) {
                             String code = buildDelimitedIcdCode(line.substring(0, 5));
                             String displayName = line.substring(6);
-//                            buildCodeInsertQueryString(insertQueryBuilder, code, displayName, codeSystem, oid);
+                            buildCodeInsertQueryString(insertQueryBuilder, code, displayName, codeSystem, oid);
 //
 //                            if ((++totalCount % BATCH_SIZE) == 0) {
 //                                insertCode(insertQueryBuilder.toString(), connection);
@@ -55,7 +55,10 @@ public abstract class Icd9BaseLoader extends BaseCodeLoader {
 //                                pendingCount = 0;
 //                            }
                             n++;
-                            t.update(codeTableInsertSQLPrefix,code.trim().toUpperCase(),displayName.trim().toUpperCase(),codeSystem,oid);
+                            t.update(insertQueryBuilder.toString());
+                            insertQueryBuilder.clear();
+                            insertQueryBuilder.append(codeTableInsertSQLPrefix);
+//                            t.update(codeTableInsertSQLPrefix,code.trim().toUpperCase(),displayName.trim().toUpperCase(),codeSystem,oid);
 
                         }
                     }
