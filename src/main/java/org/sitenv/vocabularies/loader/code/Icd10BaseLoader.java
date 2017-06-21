@@ -65,11 +65,13 @@ public abstract class Icd10BaseLoader extends IcdLoader {
                         
                         buildCodeInsertQueryString(insertQueryBuilder, code, shortDisplayName, codeSystem, oid);
                         t.update(insertQueryBuilder.toString());
-                        
                         insertQueryBuilder.clear();
                         insertQueryBuilder.append(codeTableInsertSQLPrefix);
+                        
                         buildCodeInsertQueryString(insertQueryBuilder, code, longDisplayName, codeSystem, oid);
                         t.update(insertQueryBuilder.toString());
+                        insertQueryBuilder.clear();
+                        insertQueryBuilder.append(codeTableInsertSQLPrefix);
                         
 //                        t.update(codeTableInsertSQLPrefix,buildDelimitedIcdCode(code.trim()).toUpperCase(),longDisplayName.trim().toUpperCase(),file.getParentFile().getName(),oid);
 //                        t.update(codeTableInsertSQLPrefix,buildDelimitedIcdCode(code.trim()).toUpperCase(),shortDisplayName.trim().toUpperCase(),file.getParentFile().getName(),oid);
