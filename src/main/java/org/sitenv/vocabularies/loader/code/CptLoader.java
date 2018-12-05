@@ -52,7 +52,7 @@ public class CptLoader extends BaseVocabularyLoader implements VocabularyLoader 
                             String code = line.substring(0, 5);
                             String displayName = line.substring(line.indexOf(" "));
                             
-                            System.out.println("Saving CPT with Code : " + code + " and DisplayName : " + displayName);
+                            
                             
 //                            buildCodeInsertQueryString(insertQueryBuilder, code, displayName, codeSystem, oid, CODES_IN_THIS_SYSTEM_ARE_ALWAYS_ACTIVE);
 //                            if ((++totalCount % BATCH_SIZE) == 0) {
@@ -65,6 +65,7 @@ public class CptLoader extends BaseVocabularyLoader implements VocabularyLoader 
                             //"insert into CODES (CODE, DISPLAYNAME, CODESYSTEM, CODESYSTEMOID) values (?,?,?,?)";
                         	n++;
                             t.update(insertQueryPrefix,code.trim().toUpperCase(),displayName.trim().toUpperCase(),file.getParentFile().getName(),oid);
+                            logger.trace("Inserted CPT Code : " + code + " and displayName : " + displayName);
                         }
                     }
                 }
@@ -86,7 +87,7 @@ public class CptLoader extends BaseVocabularyLoader implements VocabularyLoader 
                 }
             }
         }
-        
+        logger.debug("Number of CPT Codes processed : " + n);
         return n;
     }
 }
