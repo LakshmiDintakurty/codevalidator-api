@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.sitenv.vocabulary</groupId>
-	<artifactId>cerner-codevalidator-api-pi-cert</artifactId>
+	<artifactId>cerner-codevalidator-api</artifactId>
 	<version>1.0.6-SNAPSHOT</version>
 	<name>Code Validator API</name>
 	<url>http://www.sitenv.org</url>
@@ -136,7 +136,7 @@
 
 	<build>
     	
-		<finalName>cerner-codevalidator-pi-cert${version}</finalName>
+		<finalName>cerner-codevalidator-${version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
