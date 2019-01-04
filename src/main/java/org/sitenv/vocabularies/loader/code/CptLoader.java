@@ -37,8 +37,8 @@ public class CptLoader extends BaseVocabularyLoader implements VocabularyLoader 
         FileReader fileReader = null;
         String insertQueryPrefix = codeTableInsertSQLPrefix;
         try {
-            StrBuilder insertQueryBuilder = new StrBuilder(codeTableInsertSQLPrefix);
-            int totalCount = 0, pendingCount = 0;
+//            StrBuilder insertQueryBuilder = new StrBuilder(codeTableInsertSQLPrefix);
+//            int totalCount = 0, pendingCount = 0;
 
             for (File file : filesToLoad) {
                 if (file.isFile() && !file.isHidden()) {
@@ -51,8 +51,7 @@ public class CptLoader extends BaseVocabularyLoader implements VocabularyLoader 
                         if (!line.isEmpty()) {
                             String code = line.substring(0, 5);
                             String displayName = line.substring(line.indexOf(" "));
-                            
-                            
+                                                        
                             
 //                            buildCodeInsertQueryString(insertQueryBuilder, code, displayName, codeSystem, oid, CODES_IN_THIS_SYSTEM_ARE_ALWAYS_ACTIVE);
 //                            if ((++totalCount % BATCH_SIZE) == 0) {
@@ -64,7 +63,10 @@ public class CptLoader extends BaseVocabularyLoader implements VocabularyLoader 
                             
                             //"insert into CODES (CODE, DISPLAYNAME, CODESYSTEM, CODESYSTEMOID) values (?,?,?,?)";
                         	n++;
-                            t.update(insertQueryPrefix,code.trim().toUpperCase(),displayName.trim().toUpperCase(),file.getParentFile().getName(),oid);
+                        	code = trimAndChangeToUpperCase(code);
+                        	displayName = trimAndChangeToUpperCase(displayName);
+                        	codeSystem = trimAndChangeToUpperCase(codeSystem);
+                            t.update(insertQueryPrefix, code, displayName, codeSystem, oid);
                             logger.trace("Inserted CPT Code : " + code + " and displayName : " + displayName);
                         }
                     }
@@ -90,4 +92,8 @@ public class CptLoader extends BaseVocabularyLoader implements VocabularyLoader 
         logger.debug("Number of CPT Codes processed : " + n);
         return n;
     }
+
+	private String trimAndChangeToUpperCase(String value) {
+		return value = (StringUtils.isBlank(value)) ? value : value.trim().toUpperCase();
+	}
 }
