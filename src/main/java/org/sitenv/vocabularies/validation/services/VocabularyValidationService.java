@@ -197,16 +197,18 @@ public class VocabularyValidationService {
 	private XPath getNewXpath(final Document doc) {
 		XPath xpath = xPathFactory.newXPath();
 		xpath.setNamespaceContext(new NamespaceContext() {
-			@Override
-			public String getNamespaceURI(String prefix) {
-				String nameSpace;
-				if (CCDADocumentNamespaces.sdtc.name().equals(prefix)) {
-					nameSpace = CCDADocumentNamespaces.sdtc.getNamespace();
-				} else {
-					nameSpace = CCDADocumentNamespaces.defaultNameSpaceForCcda.getNamespace();
-				}
-				return nameSpace;
-			}
+            @Override
+            public String getNamespaceURI(String prefix) {
+                String nameSpace;
+                if(CCDADocumentNamespaces.sdtc.name().equals(prefix)) {
+                    nameSpace = CCDADocumentNamespaces.sdtc.getNamespace();
+                } else if(CCDADocumentNamespaces.xsi.name().equals(prefix)) {
+                	nameSpace = CCDADocumentNamespaces.xsi.getNamespace();
+                } else {
+                    nameSpace = CCDADocumentNamespaces.defaultNameSpaceForCcda.getNamespace();
+                }
+                return nameSpace;
+            }
 
 			@Override
 			public String getPrefix(String namespaceURI) {
