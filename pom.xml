@@ -136,7 +136,7 @@
 
 	<build>
     	
-		<finalName>cerner-codevalidator-${version}</finalName>
+		<finalName>cerner-codevalidator-api-${version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
