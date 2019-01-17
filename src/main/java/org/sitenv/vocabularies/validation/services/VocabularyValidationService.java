@@ -123,7 +123,7 @@ public class VocabularyValidationService {
 		if (doc != null) {
 			String configuredXpathExpression = "";
 			try {
-				XPath xpath = getNewXpath(doc);
+				XPath xpath = getNewXpath(doc, xPathFactory);
 
 				/*
 				 * Updated for loop to call getVocabValidationConfigurations
@@ -194,19 +194,21 @@ public class VocabularyValidationService {
 		return resultMap;
 	}
 
-	private XPath getNewXpath(final Document doc) {
+	public static XPath getNewXpath(final Document doc, XPathFactory xPathFactory) {
 		XPath xpath = xPathFactory.newXPath();
 		xpath.setNamespaceContext(new NamespaceContext() {
-			@Override
-			public String getNamespaceURI(String prefix) {
-				String nameSpace;
-				if (CCDADocumentNamespaces.sdtc.name().equals(prefix)) {
-					nameSpace = CCDADocumentNamespaces.sdtc.getNamespace();
-				} else {
-					nameSpace = CCDADocumentNamespaces.defaultNameSpaceForCcda.getNamespace();
-				}
-				return nameSpace;
-			}
+            @Override
+            public String getNamespaceURI(String prefix) {
+                String nameSpace;
+                if(CCDADocumentNamespaces.sdtc.name().equals(prefix)) {
+                    nameSpace = CCDADocumentNamespaces.sdtc.getNamespace();
+                } else if(CCDADocumentNamespaces.xsi.name().equals(prefix)) {
+                	nameSpace = CCDADocumentNamespaces.xsi.getNamespace();
+                } else {
+                    nameSpace = CCDADocumentNamespaces.defaultNameSpaceForCcda.getNamespace();
+                }
+                return nameSpace;
+            }
 
 			@Override
 			public String getPrefix(String namespaceURI) {

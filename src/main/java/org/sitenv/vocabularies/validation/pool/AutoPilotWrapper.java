@@ -36,6 +36,7 @@ public class AutoPilotWrapper {
 			this.autopilot.declareXPathNameSpace("v3", "urn:hl7-org:v3");
 			this.autopilot.declareXPathNameSpace("voc", "urn:hl7-org:v3/voc");
 			this.autopilot.declareXPathNameSpace("", "urn:hl7-org:v3");
+			this.autopilot.declareXPathNameSpace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 			this.autopilot.selectXPath(this.xpath);
 			ok = true;
 		} catch (Exception e) {
