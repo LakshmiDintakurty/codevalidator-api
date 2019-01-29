@@ -1,5 +1,6 @@
 package org.sitenv.vocabularies.validation.utils;
 
+import org.apache.log4j.Logger;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -9,6 +10,8 @@ import com.ximpleware.VTDNav;
  * Created by Brian on 10/20/2015.
  */
 public class XpathUtils {
+	private static Logger LOGGER = Logger.getLogger(XpathUtils.class); 
+	
 	public static String buildXpathFromNode(Node node) {
 		return getXPath(node, "");
 	}
@@ -36,34 +39,53 @@ public class XpathUtils {
 		return getXPath(parent, "/" + elementName + xpath);
 	}
 
+	// Build XPath from the current leaf node all the way up to the XML root element
 	public static String getVTDXPath(VTDNav vn) {
 
 		// Save off current navigator state
 		vn.push();
-		String xp = "";
+		String xp = ""; 
 
 		try {
-			// Move to a parent that is a node
-			while (vn.getTokenType(vn.getCurrentIndex()) != 0 && vn.getTokenType(vn.getCurrentIndex()) != 13) {
+//			LOGGER.debug("Before 1st while, node = " + vn.toNormalizedString(vn.getCurrentIndex()) + ", tokenType = " 
+//				+ vn.getTokenType(vn.getCurrentIndex()));
+			 
+			// Move to a parent that is a node.  If the current node is an attribute, find the element that contains this attribute
+			while (vn.getTokenType(vn.getCurrentIndex()) != 0 && vn.getTokenType(vn.getCurrentIndex()) != VTDNav.TOKEN_DOCUMENT) {
 				vn.toElement(VTDNav.PARENT);
 			}
+			
+//			LOGGER.debug("After 1st while, node = " + vn.toNormalizedString(vn.getCurrentIndex()) + ", tokenType = " 
+//				+ vn.getTokenType(vn.getCurrentIndex()));
 
-			while (vn.getTokenType(vn.getCurrentIndex()) != 13) {
+			String srcElement = null;
 
-				// Find depth
+			while (vn.getTokenType(vn.getCurrentIndex()) != VTDNav.TOKEN_DOCUMENT) {
+
+				srcElement = vn.toNormalizedString(vn.getCurrentIndex());
+				
+//				LOGGER.debug("node = " + vn.toNormalizedString(vn.getCurrentIndex()) + ", tokenType = " 
+//					+ vn.getTokenType(vn.getCurrentIndex()));
+				
+				// Find depth, i.e., the index # of the srcElement.  For example: d = 3 means there are 2 sibling elements of the same name before this element
 				int d = 1;
-				boolean e = vn.toElement(VTDNav.PREV_SIBLING);
+				boolean e = vn.toElement(VTDNav.PREV_SIBLING); 
+
 				while (e) {
-					d++;
+					if (vn.matchElement(srcElement)) { // We must match the element name, as PREV_SIBLING will pull in elements of other names at the same level
+						d++;
+					}
 					e = vn.toElement(VTDNav.PREV_SIBLING);
 				}
+			
+				xp = "/" + srcElement + "[" + d + "]" + xp;
+				
+//				LOGGER.debug("xp = " + xp);
 
-				xp = "/" + vn.toNormalizedString(vn.getCurrentIndex()) + "[" + d + "]" + xp;
-
-				vn.toElement(VTDNav.PARENT);
+				vn.toElement(VTDNav.PARENT); // Move to the parent element
 			}
 		} catch (Exception e) {
-			return "Can not determine xpath address. Error:" + e.getMessage();
+			return "Can not determine xpath address. Error: " + e.getMessage();
 		}
 
 		// Restore the navigator
