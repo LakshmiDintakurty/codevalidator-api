@@ -23,8 +23,10 @@ public class NodeValidationResult {
     private String requestedUnit;
 	private String requestedClassCode;
 	private String requestedText;
+	private String requestedNode;
 	private String configuredAllowableValuesetOidsForNode;
 	private String configuredAllowableCodesystemNamesForNode;
+	private String configuredValidationMessage;
 	private String ruleID;
 
 	private boolean nodeCodeSystemOIDFound;
@@ -105,6 +107,14 @@ public class NodeValidationResult {
 	public void setRequestedDisplayName(String requestedDisplayName) {
 		this.requestedDisplayName = requestedDisplayName;
 	}
+	
+	public String getRequestedNode() {
+		return requestedNode;
+	}
+	
+	public void setRequestedNode(String requestedNode) {
+		this.requestedNode = requestedNode;
+	}
 
 	public String getConfiguredAllowableValuesetOidsForNode() {
 		return configuredAllowableValuesetOidsForNode;
@@ -112,6 +122,14 @@ public class NodeValidationResult {
 
 	public void setConfiguredAllowableValuesetOidsForNode(String configuredAllowableValuesetOidsForNode) {
 		this.configuredAllowableValuesetOidsForNode = configuredAllowableValuesetOidsForNode;
+	}
+	
+	public String getConfiguredValidationMessage() {
+		return configuredValidationMessage;
+	}
+	
+	public void setConfiguredValidationMessage(String configuredValidationMessage) {
+		this.configuredValidationMessage = configuredValidationMessage;
 	}
 
 	public boolean isNodeValuesetsFound() {
