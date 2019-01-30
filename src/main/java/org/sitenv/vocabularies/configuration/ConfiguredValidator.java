@@ -32,6 +32,10 @@ public class ConfiguredValidator {
     String allowedValuesetOids;
     @XmlElement(name = "allowedCodesystemNames")
     String allowedCodesystemNames;
+    @XmlElement(name = "validationMessage")
+    String validationMessage;
+    @XmlElement(name = "requiredNodeName")
+    String requiredNodeName;
     @XmlAttribute(name = "id")
     String id;
     
@@ -74,6 +78,22 @@ public class ConfiguredValidator {
     public void setAllowedCodesystemNames(String allowedCodesystemNames) {
         this.allowedCodesystemNames = allowedCodesystemNames;
     }
+    
+    public void setValidationMessage(String validationMessage) {
+    	this.validationMessage = validationMessage;
+    }
+    
+    public String getValidationMessage() {
+    	return validationMessage;
+    }
+    
+    public void setRequiredNodeName(String requiredNodeName) {
+    	this.requiredNodeName = requiredNodeName;
+    }
+
+	public String getRequiredNodeName() {
+		return requiredNodeName;
+	}
 
     /*       
      * 	setter and getter methods for 'scope' attribute to support MU2 document validation.
