@@ -36,16 +36,16 @@ public class RequiredNodeValidator extends NodeValidator {
         try {
         	String nodeName = configuredValidator.getRequiredNodeName();
 //        	LOGGER.debug("nodeName: " + nodeName);
-        	
-        	if (nodeName.startsWith(AT_SIGN)) { // It's an attribute such as @unit
+
+        	if (StringUtils.isBlank(nodeName)) {
+        		LOGGER.error("nodeName " + nodeName + " is null or blank"); 
+        	} else if (nodeName.startsWith(AT_SIGN)) { // It's an attribute such as @unit
         		String attrName = nodeName.substring(ONE);
         		hasNode = vn.hasAttr(attrName);
 //        		LOGGER.debug("Found Attribute: " + attrName);
-        	} else if (StringUtils.isNotBlank(nodeName)) { // It's an element
+        	} else { // It's an element
         		hasNode = vn.matchElement(nodeName);
 //        		LOGGER.debug("Found Element: " + nodeName);        		
-        	} else {
-        		LOGGER.error("Found null or blank nodeName: " + nodeName); 
         	}
         	
 //        	LOGGER.debug("hasNode = " + hasNode);
@@ -82,6 +82,8 @@ public class RequiredNodeValidator extends NodeValidator {
 			vocabularyValidationResult.setNodeValidationResult(nodeValidationResult);
 			vocabularyValidationResult.setVocabularyValidationResultLevel(VocabularyValidationResultLevel
 					.valueOf(configuredValidationResultSeverityLevel.getCodeSeverityLevel()));
+		
+//			LOGGER.debug("vocabularyValidationResult.getVocabularyValidationResultLevel() = " + vocabularyValidationResult.getVocabularyValidationResultLevel());
 
 			String finalValidationMessage = "The node '" + nodeValidationResult.getRequestedNode()
 					+ "' does not exist at the expected path "
